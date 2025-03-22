@@ -39,7 +39,43 @@ router.post('/signup', async (req, res, next) => {
     }
 })
 
-router.post('/login', (req, res, next) => {
+router.post('/login', async (req, res, next) => {
+    const { email, password } = req.body
+
+    const sendInvalidCredentialsError = () => {
+        res.status(401).json({ errorMessage: "Invalid credentials." })
+    }
+
+    if (!email || !password) {
+        sendInvalidCredentialsError()
+        return
+    }
+
+    try {
+
+        const user = await User.findOne({ where: { email } })
+
+        if (!user) {
+            sendInvalidCredentialsError()
+            return
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
+
+        if (!isPasswordCorrect) {
+            sendInvalidCredentialsError()
+            return
+        }
+
+        const authToken = await AuthToken.create({ userId: user.id })
+        const signedToken = jwt.sign({ id: authToken.id }, process.env['TOKEN_SECRET'])
+
+        res.status(200).json({ token: signedToken })
+
+    } catch (err) {
+        console.log(err)
+        next(err)
+    }
 
 })
 
