@@ -1,0 +1,2 @@
+node_modules
+# .env omito el ignore del .env para facilidad de configuración del proyecto.
