@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
             }
         })
 
-        const movies = applySuggestionScore(apiResponse.data.results)
+        const movies = applySuggestionScore(apiResponse.data.results, 'suggestionScore')
         res.status(200).json({ movies })
 
     } catch (err) {
@@ -81,6 +81,27 @@ router.post('/add-to-favorites', async (req, res, next) => {
         next(err)
     }
 
+})
+
+router.get('/favorites', async (req, res, next) => {
+    try {
+
+        const fetchedMovies = await req.user.getMovies()
+
+        let resMovies = fetchedMovies.map(movie => {
+            const resMovie = movie.data
+            resMovie.addedAt = movie.favorite.createdAt
+            return resMovie
+        })
+
+        resMovies = applySuggestionScore(resMovies, 'suggestionForTodayScore')
+
+        res.status(200).json(resMovies)
+
+    } catch (err) {
+        console.log(err)
+        next(err)
+    }
 
 
 })

@@ -1,10 +1,10 @@
-module.exports = (movies) => {
+module.exports = (movies, propertyName) => {
     movies.forEach(movie => {
-        movie.suggestionScore = Math.random() * 99
+        movie[propertyName] = Math.random() * 99
     })
 
     movies.sort((a, b) => {
-        if (a.suggestionScore < b.suggestionScore)
+        if (a[propertyName] < b[propertyName])
             return 1
         else
             return -1
