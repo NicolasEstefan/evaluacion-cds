@@ -2,6 +2,8 @@ const sequelize = require('../util/database')
 const Sequelize = require('sequelize')
 
 const User = require('./User')
+const Movie = require('./Movie')
+
 
 const Favorite = sequelize.define('favorite', {
     userId: {
@@ -10,12 +12,15 @@ const Favorite = sequelize.define('favorite', {
         references: {
             model: User,
             key: 'id'
-        },
-        onDelete: 'CASCADE'
+        }
     },
     movieId: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        references: {
+            model: Movie,
+            key: 'id'
+        }
     }
 })
 

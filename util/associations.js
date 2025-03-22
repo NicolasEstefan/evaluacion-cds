@@ -1,10 +1,11 @@
 const User = require('../models/User')
 const Favorite = require('../models/Favorite')
 const AuthToken = require('../models/AuthToken')
+const Movie = require('../models/Movie')
 
 module.exports = () => {
-    User.hasMany(Favorite, { foreignKey: { name: 'userId', allowNull: false }, onDelete: 'CASCADE' })
-    Favorite.belongsTo(User)
+    User.belongsToMany(Movie, { through: Favorite })
+    Movie.belongsToMany(User, { through: Favorite })
     AuthToken.belongsTo(User, { onDelete: 'CASCADE', foreignKey: { allowNull: false } })
     User.hasMany(AuthToken)
 }
