@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
 const AuthToken = require('../models/AuthToken')
+const isAuth = require('../middleware/auth')
 
 const router = express.Router()
 
@@ -79,8 +80,17 @@ router.post('/login', async (req, res, next) => {
 
 })
 
-router.post('/logout', (req, res, next) => {
+router.post('/logout', isAuth, async (req, res, next) => {
 
+    try {
+        await req.authToken.destroy()
+
+        res.status(200).json({ message: 'Logged out successfully.' })
+
+    } catch (err) {
+        console.log(err)
+        next(err)
+    }
 })
 
 module.exports = router
