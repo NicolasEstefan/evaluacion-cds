@@ -4,12 +4,12 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - sqlite_data:/app/data
+      - ./data:/app/data
     ports:
       - "${PORT}:${PORT}"
     environment:
       PORT: ${PORT}
+      API_KEY: ${API_KEY}
+      API_ENDPOINT: ${API_ENDPOINT}
+      TOKEN_SECRET: ${TOKEN_SECRET}
     command: npm run dev
-
-volumes:
-  sqlite_data:
