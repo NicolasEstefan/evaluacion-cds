@@ -3,8 +3,13 @@ services:
     build: .
     volumes:
       - .:/app
+      - /app/node_modules
+      - sqlite_data:/app/data
     ports:
       - "${PORT}:${PORT}"
     environment:
       PORT: ${PORT}
     command: npm run dev
+
+volumes:
+  sqlite_data:
