@@ -10,6 +10,7 @@ services:
     environment:
       PORT: ${PORT}
       API_KEY: ${API_KEY}
-      API_ENDPOINT: ${API_ENDPOINT}
+      API_DISCOVER_ENDPOINT: ${API_DISCOVER_ENDPOINT}
+      API_SEARCH_ENDPOINT: ${API_SEARCH_ENDPOINT}
       TOKEN_SECRET: ${TOKEN_SECRET}
     command: npm run dev

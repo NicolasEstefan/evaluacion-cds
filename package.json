@@ -16,6 +16,7 @@
     "sequelize": "^6.37.6",
     "sqlite3": "^5.1.7",
     "jsonwebtoken": "^9.0.2",
-    "bcryptjs": "^3.0.2"
+    "bcryptjs": "^3.0.2",
+    "axios": "^1.8.4"
   }
 }
