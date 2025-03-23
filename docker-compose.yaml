@@ -8,6 +8,8 @@ services:
     ports:
       - "${PORT}:${PORT}"
     environment:
+      DB_ROUTE: data/db.sqlite
+      TEST_DB_ROUTE: data/test.sqlite
       PORT: ${PORT}
       API_KEY: ${API_KEY}
       API_DISCOVER_ENDPOINT: https://api.themoviedb.org/3/discover/movie
