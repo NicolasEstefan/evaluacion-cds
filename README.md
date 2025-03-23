@@ -5,7 +5,9 @@ You can read the challenge statement [here](./challenge.md).
 
 ## 🚀 Running the project 
 
-To run the project, install Docker and run the following command:
+To run the project you must first create a `.env` file at the root of the project contining two environment variables, `API_KEY` and `PORT`. The first has to be set to a valid [TMDb](https://www.themoviedb.org/) api key with read privileges. You can get a key for free by registering in their website. The latter specifies the port on which to run the application server.
+<br>
+After the .env file was created, make sure you have [Docker](https://www.docker.com/) installed and run the following command:
 
 ```bash
 $ docker compose up

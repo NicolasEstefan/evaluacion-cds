@@ -10,8 +10,8 @@ services:
     environment:
       PORT: ${PORT}
       API_KEY: ${API_KEY}
-      API_DISCOVER_ENDPOINT: ${API_DISCOVER_ENDPOINT}
-      API_SEARCH_ENDPOINT: ${API_SEARCH_ENDPOINT}
-      API_MOVIE_ENDPOINT: ${API_MOVIE_ENDPOINT}
-      TOKEN_SECRET: ${TOKEN_SECRET}
+      API_DISCOVER_ENDPOINT: https://api.themoviedb.org/3/discover/movie
+      API_SEARCH_ENDPOINT: https://api.themoviedb.org/3/search/movie
+      API_MOVIE_ENDPOINT: https://api.themoviedb.org/3/movie/
+      TOKEN_SECRET: top_secret_secret
     command: npm run dev
