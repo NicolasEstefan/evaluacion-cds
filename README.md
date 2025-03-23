@@ -66,7 +66,7 @@ Upon successful authentication, the endpoint returns an authorization token.
 
 This endpoint is used to invalidate a token. It takes the token provided in the *Authorization* header and invalidates it. This endpoint requires an authorization token.
 
-### `GET` /movies?keyword=
+### `GET` /movies
 
 This endpoint fetches movies from the [TMDb](https://www.themoviedb.org/) API and returns the first page of the results as JSON. It accepts an optional query parameter named `keyword` that, if present, is used as a search query in the request to TMDB. This endpoint requires an authorization token.
 <br>
