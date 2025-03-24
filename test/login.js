@@ -19,6 +19,17 @@ describe('Login endpoint', () => {
             firstName: 'test',
             lastName: 'user'
         })
+
+        sinon.stub(bcrypt, 'compare').callsFake((password, hash) => {
+            return password === hash
+        })
+
+        sinon.stub(jwt, 'sign').callsFake((payload, secret) => 'test_token')
+    })
+
+    after(() => {
+        bcrypt.compare.restore()
+        jwt.sign.restore()
     })
 
     const createDummyReq = (body) => {
@@ -102,6 +113,23 @@ describe('Login endpoint', () => {
             })
     })
 
+    it('Should return an error response saying "invalid credentials" (password is incorrect).', (done) => {
+        const req = createDummyReq({
+            email: 'user@test.com',
+            password: 'incorrect password'
+        })
+        const res = createDummyRes()
+
+        postLogin(req, res, () => { })
+            .then(() => {
+                expect(res).to.have.property('statusCode', 401)
+                expect(res).to.have.property('data')
+                expect(res.data).to.have.property('errorMessage', 'Invalid credentials.')
+
+                done()
+            })
+    })
+
     it('Should return an authorization token.', (done) => {
         const req = createDummyReq({
             email: 'user@test.com',
@@ -109,11 +137,7 @@ describe('Login endpoint', () => {
         })
         const res = createDummyRes()
 
-        sinon.stub(bcrypt, 'compare').callsFake((password, hash) => {
-            return password === hash
-        })
 
-        sinon.stub(jwt, 'sign').callsFake((payload, secret) => 'test_token')
 
 
 
@@ -123,8 +147,6 @@ describe('Login endpoint', () => {
                 expect(res).to.have.property('data')
                 expect(res.data).to.have.property('token', 'test_token')
 
-                bcrypt.compare.restore()
-                jwt.sign.restore()
                 done()
             })
 
