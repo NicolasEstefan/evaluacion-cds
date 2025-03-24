@@ -16,14 +16,12 @@ $ docker compose up
 This should build the docker image for the project and start the development server on the port specified in the [.env](./.env) file. If everything goes well, you should see the following output in the terminal:
 
 ```
-[+] Running 1/1
- ✔ Container evaluacion-cds-app-1  Created                                         0.0s 
-Attaching to app-1
-app-1  | 
-app-1  | > y@1.0.0 dev
-app-1  | > node --watch app.js
-app-1  | 
-app-1  | Server started on port 3000
+Attaching to nodejs-coding-challenge
+nodejs-coding-challenge  | 
+nodejs-coding-challenge  | > y@1.0.0 dev
+nodejs-coding-challenge  | > node --watch app.js
+nodejs-coding-challenge  | 
+nodejs-coding-challenge  | Server started on port 3000
 ```
 
 ## ⚡ API endpoints
